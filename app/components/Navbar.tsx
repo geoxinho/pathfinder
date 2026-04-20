@@ -44,13 +44,18 @@ function isActive(href: string, pathname: string) {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
+    null,
+  );
   const pathname = usePathname();
 
   // Close mobile menu on route change
   useEffect(() => {
-    setIsOpen(false);
-    setOpenMobileDropdown(null);
+    const timeout = setTimeout(() => {
+      setIsOpen(false);
+      setOpenMobileDropdown(null);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, [pathname]);
 
   const toggleMobileDropdown = (label: string) => {
@@ -60,7 +65,7 @@ export default function Navbar() {
   // Smoothly scroll to a hash anchor; handle same-page vs cross-page navigation
   const handleHashNav = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     const hashIndex = href.indexOf("#");
     if (hashIndex === -1) return; // no hash — let the router handle it normally
