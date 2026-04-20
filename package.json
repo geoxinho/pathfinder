@@ -26,6 +26,9 @@
     "sanity": "^3.99.0",
     "styled-components": "^6.3.12"
   },
+  "overrides": {
+    "next": "15.2.4"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
