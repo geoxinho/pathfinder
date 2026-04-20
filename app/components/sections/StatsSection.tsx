@@ -1,8 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { GraduationCap, BookOpen, Users, Trophy, Star, Award } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  GraduationCap,
+  BookOpen,
+  Users,
+  Trophy,
+  Star,
+  Award,
+} from "lucide-react";
 
 interface StatItem {
   value: number;
@@ -16,52 +23,52 @@ interface StatItem {
 const stats: StatItem[] = [
   {
     value: 1200,
-    suffix: '+',
-    label: 'Students Enrolled',
+    suffix: "+",
+    label: "Students Enrolled",
     icon: Users,
-    description: 'Active students across all levels',
-    color: 'from-blue-500 to-blue-400',
+    description: "Active students across all levels",
+    color: "from-blue-500 to-blue-400",
   },
   {
     value: 25,
-    suffix: '+',
-    label: 'Years of Excellence',
+    suffix: "+",
+    label: "Years of Excellence",
     icon: Star,
-    description: 'Decades of academic distinction',
-    color: 'from-gold to-gold-light',
+    description: "Decades of academic distinction",
+    color: "from-gold to-gold-light",
   },
   {
     value: 98,
-    suffix: '%',
-    label: 'Pass Rate',
+    suffix: "%",
+    label: "Pass Rate",
     icon: Trophy,
-    description: 'WAEC & NECO combined results',
-    color: 'from-emerald-500 to-emerald-400',
+    description: "WAEC & NECO combined results",
+    color: "from-emerald-500 to-emerald-400",
   },
-  {
-    value: 85,
-    suffix: '+',
-    label: 'Qualified Staff',
-    icon: GraduationCap,
-    description: 'Expert, certified educators',
-    color: 'from-purple-500 to-purple-400',
-  },
+  // {
+  //   value: 85,
+  //   suffix: "+",
+  //   label: "Qualified Staff",
+  //   icon: GraduationCap,
+  //   description: "Expert, certified educators",
+  //   color: "from-purple-500 to-purple-400",
+  // },
   {
     value: 5000,
-    suffix: '+',
-    label: 'Alumni Worldwide',
+    suffix: "+",
+    label: "Alumni Worldwide",
     icon: Award,
-    description: 'Making an impact globally',
-    color: 'from-rose-500 to-rose-400',
+    description: "Making an impact globally",
+    color: "from-rose-500 to-rose-400",
   },
-  {
-    value: 30,
-    suffix: '+',
-    label: 'Clubs & Activities',
-    icon: BookOpen,
-    description: 'Extra-curricular opportunities',
-    color: 'from-amber-500 to-amber-400',
-  },
+  // {
+  //   value: 30,
+  //   suffix: '+',
+  //   label: 'Clubs & Activities',
+  //   icon: BookOpen,
+  //   description: 'Extra-curricular opportunities',
+  //   color: 'from-amber-500 to-amber-400',
+  // },
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -117,14 +124,17 @@ export default function StatsSection() {
   };
 
   return (
-    <section ref={sectionRef} className="section-padding bg-white relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="section-padding bg-white relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/3 rounded-full -translate-y-1/2 blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-gold/5 rounded-full translate-y-1/2 blur-3xl" />
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 ">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -140,8 +150,8 @@ export default function StatsSection() {
             Excellence in <span className="gradient-text">Numbers</span>
           </h2>
           <p className="section-subtitle mx-auto text-center">
-            Our track record speaks for itself — years of consistent academic excellence,
-            student growth, and community impact.
+            Our track record speaks for itself — years of consistent academic
+            excellence, student growth, and community impact.
           </p>
           <div className="gold-divider mx-auto mt-5" />
         </motion.div>
@@ -150,14 +160,14 @@ export default function StatsSection() {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
         >
           {stats.map((stat) => (
             <motion.div
               key={stat.label}
               variants={cardVariants}
-              className="premium-card text-center group cursor-default stat-card"
+              className="premium-card text-center group cursor-default stat-card mx-auto justify-center content-center"
             >
               <div
                 className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mx-auto mb-4 shadow-md group-hover:scale-110 transition-transform duration-300`}
@@ -170,7 +180,9 @@ export default function StatsSection() {
               <div className="text-sm font-poppins font-semibold text-gray-800 mb-1">
                 {stat.label}
               </div>
-              <div className="text-xs text-gray-400 leading-snug">{stat.description}</div>
+              <div className="text-xs text-gray-400 leading-snug">
+                {stat.description}
+              </div>
               <div
                 className={`h-0.5 bg-gradient-to-r ${stat.color} rounded-full mt-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
               />
@@ -197,8 +209,8 @@ export default function StatsSection() {
               Be Part of Our Growing Legacy
             </h3>
             <p className="text-white/60 mb-6 max-w-lg mx-auto text-sm">
-              Applications for the 2025/2026 academic session are now open. Secure your
-              child&apos;s future at Pathfinder College.
+              Applications for the 2025/2026 academic session are now open.
+              Secure your child&apos;s future at Pathfinder College.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="/admissions" className="btn-primary text-sm px-6 py-3">
