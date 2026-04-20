@@ -1,0 +1,42 @@
+Γû▓ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 91s
+  Running TypeScript ...
+  Finished TypeScript in 19.4s ...
+  Collecting page data using 7 workers ...
+The default export of @sanity/image-url has been deprecated. Use the named export `createImageUrlBuilder` instead.
+The default export of @sanity/image-url has been deprecated. Use the named export `createImageUrlBuilder` instead.
+  Generating static pages using 7 workers (0/16) ...
+The default export of @sanity/image-url has been deprecated. Use the named export `createImageUrlBuilder` instead.
+  Generating static pages using 7 workers (4/16) 
+  Generating static pages using 7 workers (8/16) 
+The default export of @sanity/image-url has been deprecated. Use the named export `createImageUrlBuilder` instead.
+  Generating static pages using 7 workers (12/16) 
+Γ£ô Generating static pages using 7 workers (16/16) in 1612ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /about
+Γö£ Γùï /admin/admissions
+Γö£ Γùï /admissions
+Γö£ Γùï /admissions/junior
+Γö£ Γùï /admissions/senior
+Γö£ Γùï /contact
+Γö£ Γùï /events
+Γö£ Γùï /gallery
+Γö£ Γùï /news
+Γö£ ΓùÅ /news/[slug]
+Γöé Γö£ /news/admission-form-is-out
+Γöé Γö£ /news/clone-a-website
+Γöé Γöö /news/today-news
+Γöö ╞Æ /studio/[[...tool]]
+
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+
