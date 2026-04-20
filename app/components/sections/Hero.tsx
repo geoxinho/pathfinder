@@ -71,7 +71,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero.jpg"
+          src="/imgi_19_slider-b.jpg"
           alt="Pathfinder College Campus"
           fill
           priority
