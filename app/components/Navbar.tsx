@@ -84,7 +84,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-2 lg:py-4">
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -93,6 +93,7 @@ export default function Navbar() {
             alt="Pathfinder College"
             width={200}
             height={70}
+            className="w-[130px] h-auto lg:w-[200px]"
           />
         </Link>
 

@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { BookOpen, GraduationCap, FlaskConical, Monitor, Library, Dumbbell, ArrowRight, CheckCircle, Users } from 'lucide-react';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { BookOpen, GraduationCap, FlaskConical, Monitor, Library, Dumbbell, ArrowRight, CheckCircle, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -62,6 +62,161 @@ const facilities = [
     color: 'text-rose-500 bg-rose-50',
   },
 ];
+
+/* ── Facilities Carousel ── */
+const VISIBLE = { base: 1, md: 2, lg: 3 };
+
+function FacilitiesCarousel() {
+  const [index, setIndex]     = useState(0);
+  const [perPage, setPerPage] = useState(VISIBLE.lg);
+  const [dir, setDir]         = useState(1);   // 1 = forward, -1 = backward
+  const [paused, setPaused]   = useState(false);
+  const dragStart              = useRef(null);
+
+  /* update perPage on resize */
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 768)       setPerPage(VISIBLE.base);
+      else if (window.innerWidth < 1024) setPerPage(VISIBLE.md);
+      else                               setPerPage(VISIBLE.lg);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const totalSlides = Math.ceil(facilities.length / perPage);
+  const clamp = (n) => ((n % totalSlides) + totalSlides) % totalSlides;
+
+  const go = useCallback((direction) => {
+    setDir(direction);
+    setIndex((prev) => clamp(prev + direction));
+  }, [totalSlides]);
+
+  /* auto-play */
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => go(1), 4000);
+    return () => clearInterval(id);
+  }, [go, paused]);
+
+  /* drag / swipe */
+  const onDragStart = (e) => {
+    dragStart.current = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+  };
+  const onDragEnd = (e) => {
+    if (dragStart.current === null) return;
+    const endX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
+    const diff = dragStart.current - endX;
+    if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
+    dragStart.current = null;
+  };
+
+  const variants = {
+    enter:  (d) => ({ x: d > 0 ? '100%' : '-100%', opacity: 0, scale: 0.96 }),
+    center: {         x: 0,          opacity: 1, scale: 1    },
+    exit:   (d) => ({ x: d > 0 ? '-100%' : '100%', opacity: 0, scale: 0.96 }),
+  };
+
+  const slide = facilities.slice(index * perPage, index * perPage + perPage);
+  /* pad last slide if needed */
+  const padded = [...slide, ...Array(perPage - slide.length).fill(null)];
+
+  return (
+    <div
+      className="relative overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Slide track */}
+      <div
+        className="relative"
+        style={{ minHeight: 230 }}
+        onMouseDown={onDragStart}
+        onMouseUp={onDragEnd}
+        onTouchStart={onDragStart}
+        onTouchEnd={onDragEnd}
+      >
+        <AnimatePresence custom={dir} mode="wait">
+          <motion.div
+            key={index}
+            custom={dir}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.44, ease: [0.4, 0, 0.2, 1] }}
+            className={`grid gap-6 ${
+              perPage === 3 ? 'grid-cols-3' :
+              perPage === 2 ? 'grid-cols-2' :
+              'grid-cols-1'
+            }`}
+          >
+            {padded.map((facility, i) =>
+              facility ? (
+                <motion.div
+                  key={facility.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.06 * i }}
+                  className="premium-card group select-none cursor-grab active:cursor-grabbing"
+                >
+                  <div className={`w-12 h-12 rounded-2xl ${facility.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <facility.icon size={22} />
+                  </div>
+                  <h3 className="font-poppins font-bold text-primary text-sm mb-2">{facility.title}</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed">{facility.desc}</p>
+                </motion.div>
+              ) : (
+                /* invisible spacer so grid columns stay even */
+                <div key={`pad-${i}`} className="premium-card opacity-0 pointer-events-none" />
+              )
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Controls row */}
+      <div className="flex items-center justify-center gap-5 mt-8">
+        {/* Prev */}
+        <button
+          onClick={() => go(-1)}
+          aria-label="Previous"
+          className="w-10 h-10 rounded-full border-2 border-primary/20 bg-white text-primary flex items-center justify-center
+                     hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        {/* Dots */}
+        <div className="flex items-center gap-2">
+          {Array.from({ length: totalSlides }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setDir(i > index ? 1 : -1); setIndex(i); }}
+              aria-label={`Slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === index
+                  ? 'w-6 h-2.5 bg-primary'
+                  : 'w-2.5 h-2.5 bg-primary/25 hover:bg-primary/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Next */}
+        <button
+          onClick={() => go(1)}
+          aria-label="Next"
+          className="w-10 h-10 rounded-full border-2 border-primary/20 bg-white text-primary flex items-center justify-center
+                     hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm"
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function AcademicsPage() {
   const ref = useRef(null);
@@ -251,23 +406,13 @@ export default function AcademicsPage() {
             <div className="gold-divider mx-auto mt-5" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {facilities.map((facility, i) => (
-              <motion.div
-                key={facility.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.08 * i }}
-                className="premium-card group"
-              >
-                <div className={`w-12 h-12 rounded-2xl ${facility.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <facility.icon size={22} />
-                </div>
-                <h3 className="font-poppins font-bold text-primary text-sm mb-2">{facility.title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{facility.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <FacilitiesCarousel />
+          </motion.div>
         </div>
       </section>
 

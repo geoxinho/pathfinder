@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { Heart, BookOpen, Shield, Lightbulb, CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import SchoolAnthem from '@/components/sections/SchoolAnthem';
 
 const values = [
   { icon: BookOpen, title: 'Academic Excellence', desc: 'Rigorous curriculum that prepares students for global opportunities.', color: 'text-blue-500 bg-blue-50' },
@@ -230,6 +231,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* School Anthem */}
+      <SchoolAnthem />
 
       {/* CTA */}
       <section className="section-padding bg-primary relative overflow-hidden">

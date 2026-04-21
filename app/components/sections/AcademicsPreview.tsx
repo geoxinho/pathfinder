@@ -88,19 +88,19 @@ const facilities = [
     color: 'bg-emerald-50 text-emerald-500',
   },
   { icon: Music, label: 'Music Room', count: 'Full Studio', color: 'bg-rose-50 text-rose-500' },
-  {
-    icon: Dumbbell,
-    label: 'Music Room',
-    count: 'Full Instruments',
-    color: 'bg-amber-50 text-amber-500',
-  },
+  // {
+  //   icon: Dumbbell,
+  //   label: 'Music Room',
+  //   count: 'Full Instruments',
+  //   color: 'bg-amber-50 text-amber-500',
+  // },
   { icon: Palette, label: 'Art Studio', count: 'Equipped', color: 'bg-purple-50 text-purple-500' },
-  {
-    icon: Globe,
-    label: 'Language Lab',
-    count: 'Interactive',
-    color: 'bg-teal-50 text-teal-500',
-  },
+  // {
+  //   icon: Globe,
+  //   label: 'Language Lab',
+  //   count: 'Interactive',
+  //   color: 'bg-teal-50 text-teal-500',
+  // },
   {
     icon: Calculator,
     label: 'Math Centre',
@@ -241,36 +241,79 @@ export default function AcademicsPreview() {
           </div>
         </motion.div>
 
-        {/* Facilities Grid */}
+        {/* Facilities Marquee */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <div className="text-center ">
+          {/* Title */}
+          <div className="text-center mb-8">
             <h3 className="font-poppins font-bold text-xl text-primary">World-Class Facilities</h3>
-            <p className="text-gray-500 text-sm mt-1 mb-10">Equipped for 21st-century learning</p>
+            <p className="text-gray-500 text-sm mt-1">Equipped for 21st-century learning</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-            {facilities.map((fac, i) => (
-              <motion.div
-                key={fac.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.6 + i * 0.05 }}
-                className="premium-card text-center p-4 group"
-              >
-                <div
-                  className={`w-10 h-10 rounded-xl ${fac.color} flex items-center justify-center mx-auto mb-2.5 group-hover:scale-110 transition-transform`}
-                >
-                  <fac.icon size={18} />
+
+          {/* Scrolling track */}
+          <style>{`
+            @keyframes marquee-ltr {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-33.3333%); }
+            }
+            .marquee-track {
+              display: flex;
+              width: max-content;
+              animation: marquee-ltr 22s linear infinite;
+              will-change: transform;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+            .marquee-item {
+              flex-shrink: 0;
+              width: 130px;
+              margin: 0 8px;
+            }
+          `}</style>
+
+          {/* Outer wrapper — clips overflow + fades edges */}
+          <div
+            className="relative overflow-hidden"
+            style={{
+              maskImage:
+                'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            }}
+          >
+            {/* Track — items repeated ×3 for seamless loop */}
+            <div className="marquee-track py-2">
+              {[...facilities, ...facilities, ...facilities].map((fac, i) => (
+                <div key={i} className="marquee-item">
+                  <div className="premium-card text-center p-4 group h-full cursor-default"
+                       style={{ transition: 'box-shadow .2s, transform .2s' }}
+                       onMouseEnter={e => {
+                         (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
+                         (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(14,83,156,.15)';
+                       }}
+                       onMouseLeave={e => {
+                         (e.currentTarget as HTMLElement).style.transform = '';
+                         (e.currentTarget as HTMLElement).style.boxShadow = '';
+                       }}
+                  >
+                    <div
+                      className={`w-10 h-10 rounded-xl ${fac.color} flex items-center justify-center mx-auto mb-2.5
+                                  group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      <fac.icon size={18} />
+                    </div>
+                    <div className="font-poppins font-semibold text-primary text-xs mb-0.5 leading-tight">
+                      {fac.label}
+                    </div>
+                    <div className="text-gray-400 text-[10px]">{fac.count}</div>
+                  </div>
                 </div>
-                <div className="font-poppins font-semibold text-primary text-xs mb-0.5">
-                  {fac.label}
-                </div>
-                <div className="text-gray-400 text-xs">{fac.count}</div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

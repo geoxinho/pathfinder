@@ -26,12 +26,13 @@ function FL({ n, label, value, note, long }) {
    ADMIN CLIENT
 ════════════════════════════════════════════ */
 export default function AdminClient({ junior: juniorInit, senior: seniorInit }) {
-  const [tab,        setTab]        = useState("junior");
-  const [selected,   setSelected]   = useState(null);
-  const [loading,    setLoading]    = useState(false);
-  const [deleting,   setDeleting]   = useState(false);
-  const [juniorList, setJuniorList] = useState(juniorInit);
-  const [seniorList, setSeniorList] = useState(seniorInit);
+  const [tab,         setTab]        = useState("junior");
+  const [selected,    setSelected]   = useState(null);
+  const [loading,     setLoading]    = useState(false);
+  const [deleting,    setDeleting]   = useState(false);
+  const [juniorList,  setJuniorList] = useState(juniorInit);
+  const [seniorList,  setSeniorList] = useState(seniorInit);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const list = tab === "junior" ? juniorList : seniorList;
 
@@ -120,7 +121,39 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           overflow: hidden;
           background: #dde3ed;
           font-family: 'Inter', 'Segoe UI', sans-serif;
+          position: relative;
         }
+
+        /* ── Mobile sidebar toggle button ── */
+        .ac-mob-toggle {
+          display: none;
+          position: fixed;
+          bottom: 18px;
+          left: 18px;
+          z-index: 200;
+          width: 48px; height: 48px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #071d4a, #0E539C);
+          border: none;
+          color: #fff;
+          font-size: 22px;
+          cursor: pointer;
+          align-items: center; justify-content: center;
+          box-shadow: 0 4px 18px rgba(7,29,74,.45);
+          transition: transform .18s;
+        }
+        .ac-mob-toggle:active { transform: scale(.92); }
+
+        /* ── Mobile overlay ── */
+        .ac-overlay {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,.45);
+          z-index: 110;
+          animation: fadeIn .2s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* ══════════════════════════
            SIDEBAR
@@ -131,6 +164,21 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           display: flex; flex-direction: column;
           overflow: hidden;
           box-shadow: 3px 0 20px rgba(7,29,74,.35);
+          z-index: 120;
+          transition: transform .25s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Responsive overrides ── */
+        @media (max-width: 640px) {
+          .ac-mob-toggle { display: flex; }
+          .ac-overlay.open { display: block; }
+          .ac-sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh;
+            transform: translateX(-100%);
+          }
+          .ac-sidebar.open { transform: translateX(0); }
         }
         .ac-brand {
           display: flex; align-items: center; gap: 11px;
@@ -456,9 +504,17 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
       `}</style>
 
       {/* ══════════════════════════════
+          MOBILE OVERLAY
+      ══════════════════════════════ */}
+      <div
+        className={`ac-overlay${sidebarOpen ? " open" : ""}`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
+      {/* ══════════════════════════════
           SIDEBAR
       ══════════════════════════════ */}
-      <aside className="ac-sidebar">
+      <aside className={`ac-sidebar${sidebarOpen ? " open" : ""}`}>
         <div className="ac-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="Pathfinder College" />
@@ -489,7 +545,7 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
             : list.map((item) => (
               <button
                 key={item._id}
-                onClick={() => setSelected(item)}
+                onClick={() => { setSelected(item); setSidebarOpen(false); }}
                 className={`ac-item${selected?._id === item._id ? " sel" : ""}`}
               >
                 <span className="ac-item-name">{item.surname} {item.otherNames}</span>
@@ -502,6 +558,17 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           }
         </div>
       </aside>
+
+      {/* ══════════════════════════════
+          MOBILE SIDEBAR TOGGLE BUTTON
+      ══════════════════════════════ */}
+      <button
+        className="ac-mob-toggle"
+        onClick={() => setSidebarOpen((o) => !o)}
+        aria-label="Toggle sidebar"
+      >
+        {sidebarOpen ? "✕" : "☰"}
+      </button>
 
       {/* ══════════════════════════════
           MAIN
