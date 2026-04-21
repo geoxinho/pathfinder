@@ -66,7 +66,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[600px] md:min-h-screen flex items-center overflow-hidden pt-16 md:pt-[72px]">
+    <section className="relative min-h-[600px] md:h-screen flex items-center overflow-hidden">
       {/* Background Image — fixed on scroll */}
       <div
         className="absolute inset-0 z-0"
@@ -129,7 +129,7 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 container-custom w-full py-10">
+      <div className="relative z-10 container-custom w-full pt-24 md:pt-32 pb-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -137,8 +137,8 @@ export default function Hero() {
           className="max-w-3xl"
         >
           {/* Tag */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <span className="inline-flex items-center gap-2 bg-gold/20 backdrop-blur-sm border border-gold/30 text-gold font-poppins font-semibold text-xs tracking-widest uppercase px-4 py-2 rounded-full">
+          <motion.div variants={itemVariants} className="mb-6 ">
+            <span className="inline-flex items-center gap-2 bg-gold/20 backdrop-blur-sm border border-gold/30 text-gold font-poppins font-semibold text-xs tracking-widest uppercase px-4 py-2 rounded-full mt-20">
               <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
               Pathfinder College
             </span>
@@ -187,7 +187,7 @@ export default function Hero() {
           >
             <Link
               href="/admissions"
-              className="btn-primary group text-base px-7 py-4"
+              className="btn-primary group text-base px-7 py-4 md:mb-20"
             >
               Apply Now — {new Date().getFullYear()} /{" "}
               {new Date().getFullYear() + 1}
@@ -197,27 +197,9 @@ export default function Hero() {
               />
             </Link>
           </motion.div>
-
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      {/* <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
-        <span className="text-white/40 text-xs tracking-widest uppercase font-poppins">
-          Scroll
-        </span>
-        <div className="w-5 h-8 border-2 border-white/30 rounded-full flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
-        </div>
-        <ChevronDown size={16} className="text-white/30 animate-bounce" />
-      </motion.div> */}
-
-      {/* Bottom curve */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg
           viewBox="0 0 1440 80"
