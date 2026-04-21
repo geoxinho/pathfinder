@@ -11,7 +11,6 @@ import {
   Award,
   Users,
 } from "lucide-react";
-import Image from "next/image";
 
 const floatingBadges = [
   {
@@ -67,16 +66,18 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/Hero.jpg"
-          alt="Pathfinder College Campus"
-          fill
-          priority
-          className="object-cover"
-        />
+    <section className="relative min-h-[600px] md:min-h-screen flex items-center overflow-hidden">
+      {/* Background Image — fixed on scroll */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/Hero.jpg')",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         {/* Single light dark overlay — no blue, not too heavy */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/55 via-black/30 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -127,8 +128,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Main Content — padded to clear the fixed navbar on all devices */}
-      <div className="relative z-10 container-custom w-full pt-24 md:pt-28 lg:pt-32 pb-24">
+      {/* Main Content — marginTop pushes flex-center down past the fixed navbar */}
+      <div className="relative z-10 container-custom w-full py-8" style={{ marginTop: "70px" }}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
