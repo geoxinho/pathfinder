@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&h=630&fit=crop",
+        url: "/imgi_19_slider-b.jpg",
         width: 1200,
         height: 630,
         alt: "Pathfinder College",

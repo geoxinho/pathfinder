@@ -197,32 +197,11 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          {/* Stats Row */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap gap-6 md:gap-10"
-          >
-            {[
-              { value: "1,200+", label: "Students" },
-              { value: "25 Yrs", label: "Excellence" },
-              { value: "98%", label: "Pass Rate" },
-              { value: "85+", label: "Staff" },
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col">
-                <span className="text-2xl md:text-3xl font-poppins font-black text-white leading-none">
-                  {stat.value}
-                </span>
-                <span className="text-white/50 text-xs mt-1 tracking-wide uppercase">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
@@ -235,7 +214,7 @@ export default function Hero() {
           <div className="w-1 h-2 bg-white/60 rounded-full animate-bounce" />
         </div>
         <ChevronDown size={16} className="text-white/30 animate-bounce" />
-      </motion.div>
+      </motion.div> */}
 
       {/* Bottom curve */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
