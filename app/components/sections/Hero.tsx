@@ -66,7 +66,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[600px] md:min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[600px] md:min-h-screen flex items-center overflow-hidden pt-16 md:pt-[72px]">
       {/* Background Image — fixed on scroll */}
       <div
         className="absolute inset-0 z-0"
@@ -128,8 +128,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Main Content — marginTop pushes flex-center down past the fixed navbar */}
-      <div className="relative z-10 container-custom w-full py-8" style={{ marginTop: "70px" }}>
+      {/* Main Content */}
+      <div className="relative z-10 container-custom w-full py-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
