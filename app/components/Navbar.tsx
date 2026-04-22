@@ -194,7 +194,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
-          <div className="container-custom py-4 flex flex-col gap-1">
+          <div className="container-custom py-8 flex flex-col gap-1">
             {navLinks.map((link) => {
               const active = isActive(link.href, pathname);
               const mobileOpen = openMobileDropdown === link.label;
