@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 // import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageWrapper from "@/components/PageWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -87,6 +88,7 @@ export default function RootLayout({
         <Footer />
         {/* <WhatsAppFloat /> */}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
