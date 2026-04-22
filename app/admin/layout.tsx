@@ -1,13 +1,15 @@
 // app/admin/layout.tsx
 // This layout hides the global Navbar, Footer, and WhatsApp float
 // so the admin panel can take over the full viewport.
+import PasscodeGate from "../components/PasscodeGate";
+
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <PasscodeGate>
       <style>{`
         /* Hide site chrome on all /admin routes */
         body > header          { display: none !important; }
@@ -18,6 +20,6 @@ export default function AdminLayout({
         body > div:last-child a[href*="wa.me"] { display: none !important; }
       `}</style>
       {children}
-    </>
+    </PasscodeGate>
   );
 }

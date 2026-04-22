@@ -235,6 +235,9 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
            MAIN
         ══════════════════════════ */
         .ac-main { flex: 1; overflow-y: auto; padding: 22px 24px; display: flex; flex-direction: column; }
+        @media (max-width: 640px) {
+          .ac-main { padding: 12px 10px; }
+        }
         .ac-empty {
           flex: 1; display: flex; flex-direction: column;
           align-items: center; justify-content: center;
@@ -252,6 +255,9 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           max-width: 780px;
           width: 100%; margin: 0 auto;
         }
+        @media (max-width: 640px) {
+          .ac-card { border-radius: 10px; }
+        }
 
         /* Toolbar */
         .ac-toolbar {
@@ -259,14 +265,20 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           padding: 14px 22px;
           border-bottom: 1px solid #e2e8f0;
           background: linear-gradient(90deg, #f7f9fc, #eef3fa);
+          flex-wrap: wrap;
+          gap: 10px;
         }
-        .ac-toolbar-left { display: flex; align-items: center; gap: 10px; }
+        .ac-toolbar-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .ac-toolbar-left h2 { font-size: 14px; font-weight: 700; color: #1e293b; }
         .ac-type-badge {
           font-size: 10px; padding: 3px 10px; border-radius: 20px;
           background: #dbeafe; color: #0E539C; font-weight: 600;
         }
-        .ac-actions { display: flex; gap: 8px; }
+        .ac-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        @media (max-width: 640px) {
+          .ac-toolbar { padding: 11px 14px; }
+          .ac-actions { gap: 6px; }
+        }
 
         /* Buttons */
         .ac-btn {
@@ -294,16 +306,23 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           color: #fff;
           box-shadow: 0 2px 8px rgba(220,38,38,.28);
         }
+        @media (max-width: 480px) {
+          .ac-btn { padding: 7px 11px; font-size: 11px; }
+        }
 
         /* Form scroll wrapper */
         .ac-form-wrap {
           max-height: calc(100vh - 170px);
           overflow-y: auto;
+          overflow-x: hidden;
           padding: 20px;
           background: #dde3ed;
         }
         .ac-form-wrap::-webkit-scrollbar { width: 5px; }
         .ac-form-wrap::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 5px; }
+        @media (max-width: 640px) {
+          .ac-form-wrap { padding: 10px 6px; max-height: calc(100vh - 140px); }
+        }
 
         /* A4 paper shadow on screen */
         .ac-a4-paper {
@@ -313,6 +332,9 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           margin: 0 auto;
           box-shadow: 0 4px 32px rgba(0,0,0,.18);
           padding: 28px 32px 48px;
+        }
+        @media (max-width: 640px) {
+          .ac-a4-paper { padding: 16px 12px 32px; box-shadow: none; }
         }
 
         /* ═══════════════════════════════════════════════
@@ -332,9 +354,10 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           border-bottom: 3px double #1a3a6b;
           padding-bottom: 14px;
           margin-bottom: 8px;
+          flex-wrap: wrap;
         }
         .pf-logo { height: 72px; width: auto; object-fit: contain; flex-shrink: 0; }
-        .pf-header-text { flex: 1; }
+        .pf-header-text { flex: 1; min-width: 160px; }
         .pf-school-name { font-size: 21px; font-weight: bold; color: #1a3a6b; letter-spacing: .6px; line-height: 1.2; }
         .pf-school-sub  { font-size: 10.5px; color: #1a3a6b; font-style: italic; margin-top: 3px; }
         .pf-school-addr { font-size: 9.5px; color: #444; margin-top: 4px; line-height: 1.4; }
@@ -346,6 +369,11 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
           flex-shrink: 0; overflow: hidden;
         }
         .pf-passport-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        @media (max-width: 400px) {
+          .pf-school-name { font-size: 16px; }
+          .pf-passport-box { width: 70px; height: 84px; }
+          .pf-logo { height: 56px; }
+        }
 
         /* ── Form title ── */
         .pf-title {
@@ -376,7 +404,7 @@ export default function AdminClient({ junior: juniorInit, senior: seniorInit }) 
         /* ── Inline row ── */
         .pf-row {
           display: flex; align-items: flex-end;
-          flex-wrap: nowrap; margin-bottom: 10px; gap: 3px;
+          flex-wrap: wrap; margin-bottom: 10px; gap: 3px;
         }
         .pf-row-wrap { flex-wrap: wrap; }
         .pf-indent   { padding-left: 20px; }
