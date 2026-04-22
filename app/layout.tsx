@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
+// import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageWrapper from "@/components/PageWrapper";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -84,7 +85,8 @@ export default function RootLayout({
         <Navbar />
         <PageWrapper>{children}</PageWrapper>
         <Footer />
-        <WhatsAppFloat />
+        {/* <WhatsAppFloat /> */}
+        <SpeedInsights />
       </body>
     </html>
   );

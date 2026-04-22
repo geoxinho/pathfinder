@@ -1,27 +1,43 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Phone, Mail, MapPin, Globe, Send, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Phone, Mail, MapPin, Globe, Send, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 const contactInfo = [
-  { icon: MapPin, label: 'Address', value: 'Pathfinder College Road,\nIbadan, Oyo State, Nigeria', color: 'text-blue-500 bg-blue-50' },
-  { icon: Phone, label: 'Phone', value: '+234 (0) 801 234 5678', color: 'text-emerald-500 bg-emerald-50' },
-  { icon: Mail, label: 'Email', value: 'info@pathfindercollege.edu.ng', color: 'text-gold bg-gold/10' },
+  {
+    icon: MapPin,
+    label: "Address",
+    value: "Pathfinder College Road,\nIbadan, Oyo State, Nigeria",
+    color: "text-blue-500 bg-blue-50",
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "+234 (0) 801 234 5678",
+    color: "text-emerald-500 bg-emerald-50",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "info@pathfindercollege.edu.ng",
+    color: "text-gold bg-gold/10",
+  },
 ];
 
 const socials = [
-  { icon: '🌐', label: 'Facebook', href: '#' },
-  { icon: '🐦', label: 'Twitter', href: '#' },
-  { icon: '💼', label: 'LinkedIn', href: '#' },
-  { icon: '📸', label: 'Instagram', href: '#' },
+  { icon: "🌐", label: "Facebook", href: "#" },
+  { icon: "🐦", label: "Twitter", href: "#" },
+  { icon: "💼", label: "LinkedIn", href: "#" },
+  { icon: "📸", label: "Instagram", href: "#" },
 ];
 
 export default function ContactPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e) {
@@ -61,13 +77,22 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-white/70 max-w-lg mx-auto text-base leading-relaxed"
           >
-            Whether you are an aspiring student, a fellow academic, or a community partner, we invite you to reach out and explore the future of education with us.
+            Whether you are an aspiring student, a fellow academic, or a
+            community partner, we invite you to reach out and explore the future
+            of education with us.
           </motion.p>
           <div className="w-12 h-0.5 bg-gold mx-auto mt-6" />
         </div>
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 60L1440 60L1440 30C1200 60 960 70 720 60C480 50 240 20 0 30L0 60Z" fill="white" />
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 60L1440 60L1440 30C1200 60 960 70 720 60C480 50 240 20 0 30L0 60Z"
+              fill="white"
+            />
           </svg>
         </div>
       </section>
@@ -83,52 +108,73 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="premium-card"
             >
-              <h2 className="font-poppins font-bold text-primary text-xl mb-6">Inquiry Form</h2>
+              <h2 className="font-poppins font-bold text-primary text-xl mb-6">
+                Inquiry Form
+              </h2>
 
               {sent ? (
                 <div className="text-center py-12">
                   <p className="text-5xl mb-4">✅</p>
-                  <p className="font-poppins font-bold text-primary text-lg">Message Sent!</p>
-                  <p className="text-gray-500 text-sm mt-2">We&apos;ll get back to you shortly.</p>
+                  <p className="font-poppins font-bold text-primary text-lg">
+                    Message Sent!
+                  </p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    We&apos;ll get back to you shortly.
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">Name</label>
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                        Name
+                      </label>
                       <input
                         type="text"
                         placeholder="Your Full Name"
                         required
                         value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        onChange={(e) =>
+                          setForm({ ...form, name: e.target.value })
+                        }
                         className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">Email</label>
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                        Email
+                      </label>
                       <input
                         type="email"
                         placeholder="email@address.com"
                         required
                         value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        onChange={(e) =>
+                          setForm({ ...form, email: e.target.value })
+                        }
                         className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">Message</label>
+                    <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                      Message
+                    </label>
                     <textarea
                       placeholder="How can we help you?"
                       rows={6}
                       required
                       value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      onChange={(e) =>
+                        setForm({ ...form, message: e.target.value })
+                      }
                       className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all resize-y"
                     />
                   </div>
-                  <button type="submit" className="btn-primary inline-flex items-center gap-2 text-sm">
+                  <button
+                    type="submit"
+                    className="btn-primary inline-flex items-center gap-2 text-sm"
+                  >
                     <Send size={14} /> Send Message
                   </button>
                 </form>
@@ -143,16 +189,24 @@ export default function ContactPage() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="premium-card"
               >
-                <h2 className="font-poppins font-bold text-primary text-xl mb-6">Get in Touch</h2>
+                <h2 className="font-poppins font-bold text-primary text-xl mb-6">
+                  Get in Touch
+                </h2>
                 <div className="space-y-5">
                   {contactInfo.map((item) => (
                     <div key={item.label} className="flex items-start gap-4">
-                      <div className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}>
+                      <div
+                        className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center flex-shrink-0`}
+                      >
                         <item.icon size={18} />
                       </div>
                       <div>
-                        <p className="font-poppins font-semibold text-primary text-sm mb-0.5">{item.label}</p>
-                        <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line">{item.value}</p>
+                        <p className="font-poppins font-semibold text-primary text-sm mb-0.5">
+                          {item.label}
+                        </p>
+                        <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line">
+                          {item.value}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -160,7 +214,9 @@ export default function ContactPage() {
 
                 {/* Social */}
                 <div className="mt-8 pt-6 border-t border-gray-100">
-                  <p className="font-poppins font-bold text-primary text-sm mb-4">Follow the Journey</p>
+                  <p className="font-poppins font-bold text-primary text-sm mb-4">
+                    Follow the Journey
+                  </p>
                   <div className="grid grid-cols-2 gap-3">
                     {socials.map((s) => (
                       <a
@@ -168,7 +224,8 @@ export default function ContactPage() {
                         href={s.href}
                         className="flex items-center gap-3 bg-light-gray border border-gray-100 rounded-xl px-4 py-3 text-sm font-poppins font-semibold text-primary hover:border-gold/30 hover:bg-gold/5 transition-all"
                       >
-                        <span>{s.icon}</span>{s.label}
+                        <span>{s.icon}</span>
+                        {s.label}
                       </a>
                     ))}
                   </div>
@@ -192,6 +249,10 @@ export default function ContactPage() {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </section>
+
+      {/* WhatsAppFloat */}
+
+      <WhatsAppFloat />
     </main>
   );
 }
