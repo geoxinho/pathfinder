@@ -29,7 +29,7 @@ export default function Hero() {
       {/* Background — Next.js Image with priority for optimal LCP */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero.jpg"
+          src="/Hero.jpg"
           alt="Pathfinder College Campus"
           fill
           priority
