@@ -29,16 +29,31 @@ const navLinks = [
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/news" },
   { label: "Events", href: "/events" },
+  {
+    label: "Our People",
+    href: "/staff",
+    children: [
+      { label: "Meet Our Staff", href: "/staff" },
+      { label: "Teaching Vacancies", href: "/careers" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
-function isActive(href: string, pathname: string) {
-  if (href === "/") return pathname === "/";
-  return (
-    pathname === href ||
-    pathname.startsWith(href + "/") ||
-    pathname.startsWith(href + "#")
-  );
+function isActive(link: { href: string; children?: { href: string }[] }, pathname: string) {
+  if (link.href === "/") return pathname === "/";
+  if (
+    pathname === link.href ||
+    pathname.startsWith(link.href + "/") ||
+    pathname.startsWith(link.href + "#")
+  ) return true;
+  // also activate if any child matches
+  if (link.children) {
+    return link.children.some(
+      (c) => pathname === c.href || pathname.startsWith(c.href + "/")
+    );
+  }
+  return false;
 }
 
 export default function Navbar() {
@@ -98,9 +113,9 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navLinks.map((link) => {
-            const active = isActive(link.href, pathname);
+            const active = isActive(link, pathname);
             return link.children ? (
               <div
                 key={link.label}
@@ -110,7 +125,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1 px-4 py-2 rounded-xl font-poppins font-medium text-sm transition-colors ${
+                  className={`flex items-center gap-1 px-3 py-2 rounded-xl font-poppins font-medium text-sm transition-colors ${
                     active
                       ? "text-primary bg-primary/10 font-semibold"
                       : "text-gray-700 hover:text-primary hover:bg-primary/5"
@@ -152,7 +167,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`relative px-4 py-2 rounded-xl font-poppins font-medium text-sm transition-colors ${
+                className={`relative px-3 py-2 rounded-xl font-poppins font-medium text-sm transition-colors ${
                   active
                     ? "text-primary bg-primary/10 font-semibold"
                     : "text-gray-700 hover:text-primary hover:bg-primary/5"
@@ -196,7 +211,7 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
           <div className="container-custom py-8 flex flex-col gap-1">
             {navLinks.map((link) => {
-              const active = isActive(link.href, pathname);
+              const active = isActive(link, pathname);
               const mobileOpen = openMobileDropdown === link.label;
               return (
                 <div key={link.label}>
