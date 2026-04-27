@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import {
   ArrowRight,
   BookOpen,
@@ -184,11 +185,14 @@ export default function AcademicsPreview() {
           className="grid lg:grid-cols-2 gap-12 items-center mb-16"
         >
           {/* Image */}
-          <div className="relative rounded-3xl overflow-hidden shadow-premium">
-            <img
+          <div className="relative rounded-3xl overflow-hidden shadow-premium h-[400px]">
+            <Image
               src={activeData.image}
               alt={activeData.label}
-              className="w-full h-[400px] object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
             <div

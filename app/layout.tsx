@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Poppins, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-// import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageWrapper from "@/components/PageWrapper";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+
+// Self-hosted via next/font — zero render-blocking, optimised subset
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+  display: "swap",
+  preload: true,
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -67,26 +84,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/favico.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <script async src="https://js.paystack.co/v1/inline.js" />
       </head>
       <body className="antialiased">
         <Navbar />
         <PageWrapper>{children}</PageWrapper>
         <Footer />
-        {/* <WhatsAppFloat /> */}
         <SpeedInsights />
         <Analytics />
       </body>
