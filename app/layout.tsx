@@ -47,18 +47,18 @@ export const metadata: Metadata = {
   creator: "Pathfinder College",
   publisher: "Pathfinder College",
   formatDetection: { email: false, address: false, telephone: false },
-  metadataBase: new URL("https://pathfindercollege.edu.ng"),
+  metadataBase: new URL("https://pathfindercollege.vercel.app"),
   openGraph: {
     title: "Pathfinder College — Raising Future Leaders",
     description:
       "A premier faith-based secondary school in Samonda, Ibadan. Academic excellence, character formation & holistic development.",
-    url: "https://pathfindercollege.edu.ng",
+    url: "https://pathfindercollege.vercel.app",
     siteName: "Pathfinder College",
     locale: "en_NG",
     type: "website",
     images: [
       {
-        url: "/imgi_19_slider-b.jpg",
+        url: "https://pathfindercollege.vercel.app/imgi_19_slider-b.jpg",
         width: 1200,
         height: 630,
         alt: "Pathfinder College",
