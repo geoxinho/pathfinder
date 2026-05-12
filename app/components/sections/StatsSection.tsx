@@ -22,7 +22,7 @@ interface StatItem {
 
 const stats: StatItem[] = [
   {
-    value: 1000,
+    value: 500,
     suffix: "+",
     label: "Students Enrolled",
     icon: Users,
@@ -54,7 +54,7 @@ const stats: StatItem[] = [
   //   color: "from-purple-500 to-purple-400",
   // },
   {
-    value: 2000,
+    value: 700,
     suffix: "+",
     label: "Alumni Worldwide",
     icon: Award,

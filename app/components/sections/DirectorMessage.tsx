@@ -69,7 +69,7 @@ export default function DirectorMessage() {
                 <div className="absolute bottom-0 left-0 right-0 z-20 p-8">
                   <div className="w-12 h-0.5 bg-gold mb-4" />
                   <p className="font-poppins font-black text-white text-xl leading-tight">
-                    Evangelist (Mrs) Toun Soetan
+                    The Late Dr. Evangelist (Mrs.) Toun Soetan
                   </p>
                   <p className="text-gold text-sm font-poppins font-semibold mt-1">
                     Founder &amp; Director
