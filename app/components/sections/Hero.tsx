@@ -25,17 +25,17 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen flex items-center overflow-hidden">
+    <section className="relative h-[100dvh] flex items-center overflow-hidden">
       {/* Background — Sticky effect constrained to the section to prevent leakage */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="sticky top-0 h-screen w-full">
+        <div className="md:sticky top-0 h-full md:h-screen w-full">
           <Image
             src="/hero_image.png"
             alt="Pathfinder College Campus"
             fill
             priority
             quality={100}
-            className="object-cover object-center"
+            className="object-cover object-center w-full h-full"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/30 z-10" />
@@ -118,16 +118,6 @@ export default function Hero() {
             </Link>
           </div>
         </motion.div>
-      </div>
-
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0 80L1440 80L1440 40C1200 80 960 100 720 80C480 60 240 20 0 40L0 80Z"
-            fill="white"
-          />
-        </svg>
       </div>
     </section>
   );
