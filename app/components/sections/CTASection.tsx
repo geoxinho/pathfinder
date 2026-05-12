@@ -76,10 +76,7 @@ export default function CTASection() {
                 Apply Online Now
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#" download className="btn-secondary group text-base px-8 py-4">
-                <Download size={18} />
-                Download Prospectus
-              </a>
+
             </motion.div>
 
             {/* Trust indicators */}
@@ -104,8 +101,8 @@ export default function CTASection() {
           </div>
         </motion.div>
 
-        {/* Bottom three cards */}
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Bottom cards */}
+        <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {[
             {
               icon: Phone,
@@ -123,14 +120,7 @@ export default function CTASection() {
               href: '/contact',
               color: 'text-gold bg-gold/10',
             },
-            {
-              icon: Download,
-              title: 'Get the Prospectus',
-              desc: 'Download our comprehensive school prospectus for full details.',
-              cta: 'Download PDF',
-              href: '#',
-              color: 'text-emerald-500 bg-emerald-50',
-            },
+
           ].map((card, i) => (
             <motion.div
               key={card.title}

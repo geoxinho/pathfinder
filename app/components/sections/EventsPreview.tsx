@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight, Clock, CheckCircle2, Hourglass } from 'lucide-react';
 import Image from 'next/image';
-import { client } from '@/lib/sanity';
 
 // Fallback events used when Sanity returns no data
 const FALLBACK_EVENTS = [
@@ -18,7 +17,7 @@ const FALLBACK_EVENTS = [
     location: 'Pathfinder College Campus, Samonda',
     category: 'Academic',
     image:
-      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop&q=80',
+      '/IMG-20260512-WA0002.jpg',
   },
   {
     _id: '2',
@@ -29,7 +28,7 @@ const FALLBACK_EVENTS = [
     location: 'Pathfinder Sports Complex',
     category: 'Sports',
     image:
-      'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&h=400&fit=crop&q=80',
+      '/IMG-20260512-WA0003.jpg',
   },
   {
     _id: '3',
@@ -40,7 +39,7 @@ const FALLBACK_EVENTS = [
     location: 'Pathfinder College Auditorium',
     category: 'Community',
     image:
-      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=400&fit=crop&q=80',
+      '/IMG-20260512-WA0011.jpg',
   },
 ];
 
@@ -86,14 +85,9 @@ export default function EventsPreview() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const data = await client.fetch(
-          `*[_type == "event"] | order(eventDate asc) {
-            _id, title, subtitle, eventDate, location,
-            category, description, featured,
-            "image": image.asset->url
-          }`
-        );
-        setEvents(data && data.length > 0 ? data : FALLBACK_EVENTS);
+        const res = await fetch('/api/events');
+        const data = await res.json();
+        setEvents(Array.isArray(data) && data.length > 0 ? data : FALLBACK_EVENTS);
       } catch {
         setEvents(FALLBACK_EVENTS);
       } finally {

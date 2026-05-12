@@ -5,7 +5,6 @@ import { motion, useInView } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight, Clock } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { client } from '@/lib/sanity';
 
 const FALLBACK_EVENTS = [
   {
@@ -54,14 +53,9 @@ export default function EventsPage() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const data = await client.fetch(
-          `*[_type == "event"] | order(eventDate asc) {
-            _id, title, subtitle, eventDate, location,
-            category, description, featured,
-            "image": image.asset->url
-          }`
-        );
-        setEvents(data && data.length > 0 ? data : FALLBACK_EVENTS);
+        const res = await fetch('/api/events');
+        const data = await res.json();
+        setEvents(Array.isArray(data) && data.length > 0 ? data : FALLBACK_EVENTS);
       } catch {
         setEvents(FALLBACK_EVENTS);
       } finally {

@@ -5,7 +5,6 @@ import { motion, useInView } from 'framer-motion';
 import { Tag, ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { client, urlFor } from '@/lib/sanity';
 
 const categoryColors = {
   Announcement: 'bg-blue-50 text-blue-600 border-blue-100',
@@ -37,11 +36,7 @@ function getExcerpt(post) {
 
 function getImageUrl(post) {
   if (!post.coverImage) return null;
-  try {
-    return urlFor(post.coverImage).width(600).height(400).url();
-  } catch {
-    return null;
-  }
+  return post.coverImage;
 }
 
 export default function NewsPage() {
@@ -53,12 +48,9 @@ export default function NewsPage() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const data = await client.fetch(
-          `*[_type == "news"] | order(publishedAt desc) {
-            _id, title, slug, excerpt, body, coverImage, publishedAt, category, author
-          }`
-        );
-        setPosts(data || []);
+        const res = await fetch('/api/news');
+        const data = await res.json();
+        setPosts(Array.isArray(data) ? data : []);
       } catch {
         setPosts([]);
       } finally {
@@ -137,7 +129,7 @@ export default function NewsPage() {
                   transition={{ duration: 0.6 }}
                   className="mb-12"
                 >
-                  <Link href={`/news/${featured.slug?.current}`} className="block">
+                  <Link href={`/news/${featured.slug}`} className="block">
                     <div className="premium-card p-0 overflow-hidden group">
                       <div className="grid lg:grid-cols-2">
                         {/* Image */}
@@ -204,7 +196,7 @@ export default function NewsPage() {
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.5, delay: 0.1 * i }}
                       >
-                        <Link href={`/news/${post.slug?.current}`} className="block h-full">
+                        <Link href={`/news/${post.slug}`} className="block h-full">
                           <article className="premium-card p-0 overflow-hidden group h-full flex flex-col">
                             {/* Thumbnail */}
                             <div className="relative h-44 overflow-hidden rounded-t-2xl bg-primary-light flex-shrink-0">

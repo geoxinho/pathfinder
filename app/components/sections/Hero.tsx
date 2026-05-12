@@ -8,7 +8,7 @@ import { ArrowRight, Star, Award, Users } from "lucide-react";
 
 const floatingBadges = [
   { icon: Star, text: "Best School", sub: "Ibadan 2024", color: "from-gold to-gold-light", delay: 0 },
-  { icon: Award, text: "98% Pass Rate", sub: "WAEC/NECO", color: "from-primary to-primary-light", delay: 0.2 },
+  { icon: Award, text: "16+ Years", sub: "Experience", color: "from-gold to-amber-400", delay: 0.2 },
   { icon: Users, text: "1,200+", sub: "Students", color: "from-emerald-500 to-emerald-400", delay: 0.4 },
 ];
 
@@ -29,7 +29,7 @@ export default function Hero() {
       {/* Background — Next.js Image with priority for optimal LCP */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/Hero.jpg"
+          src="/IMG-20260512-WA0004.jpg"
           alt="Pathfinder College Campus"
           fill
           priority

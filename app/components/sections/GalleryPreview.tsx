@@ -12,37 +12,37 @@ const GALLERY_ITEMS = [
     id: '1',
     title: 'Question and Answer',
     category: 'Events',
-    image: '/gallery_1.jpg',
+    image: '/IMG-20260512-WA0005.jpg',
   },
   {
     id: '2',
     title: 'Jss 1 Class',
     category: 'Classes',
-    image: '/gallery_2.jpg',
+    image: '/IMG-20260512-WA0006.jpg',
   },
   {
     id: '3',
     title: 'Debate Competition',
     category: 'Events',
-    image: '/gallery_5.jpg',
+    image: '/IMG-20260512-WA0009.jpg',
   },
   {
     id: '4',
     title: 'Junior Categories',
     category: 'primary 5',
-    image: '/gallery_4.jpg',
+    image: '/IMG-20260512-WA0010.jpg',
   },
   {
     id: '5',
     title: 'Graduation Ceremony',
     category: 'Event',
-    image: '/gallery_6.jpg',
+    image: '/IMG-20260512-WA0011.jpg',
   },
   {
     id: '6',
     title: 'Junior Categories',
     category: 'Class Room',
-    image: '/gallery_3.jpg',
+    image: '/IMG-20260512-WA0000.jpg',
   },
 ];
 

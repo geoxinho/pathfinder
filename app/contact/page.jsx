@@ -37,12 +37,34 @@ const socials = [
 export default function ContactPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError("");
+    
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const data = await res.json();
+        setError(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Failed to send message. Please check your connection.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -119,7 +141,7 @@ export default function ContactPage() {
                     Message Sent!
                   </p>
                   <p className="text-gray-500 text-sm mt-2">
-                    We&apos;ll get back to you shortly.
+                    Your inquiry regarding <strong className="text-primary">{form.subject}</strong> has been received. We&apos;ll get back to you shortly.
                   </p>
                 </div>
               ) : (
@@ -156,6 +178,37 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                        Phone (Optional)
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+234..."
+                        value={form.phone}
+                        onChange={(e) =>
+                          setForm({ ...form, phone: e.target.value })
+                        }
+                        className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Purpose of inquiry"
+                        required
+                        value={form.subject}
+                        onChange={(e) =>
+                          setForm({ ...form, subject: e.target.value })
+                        }
+                        className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
+                      />
+                    </div>
+                  </div>
                   <div>
                     <label className="block text-xs font-poppins font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Message
@@ -171,11 +224,22 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 bg-light-gray border border-gray-200 rounded-xl text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all resize-y"
                     />
                   </div>
+                  {error && (
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-xs">
+                      {error}
+                    </div>
+                  )}
                   <button
                     type="submit"
-                    className="btn-primary inline-flex items-center gap-2 text-sm"
+                    disabled={sending}
+                    className="btn-primary inline-flex items-center gap-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <Send size={14} /> Send Message
+                    {sending ? (
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <Send size={14} />
+                    )}
+                    {sending ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}

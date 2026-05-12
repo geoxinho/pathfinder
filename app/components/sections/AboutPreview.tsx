@@ -66,7 +66,7 @@ export default function AboutPreview() {
             {/* Main image */}
             <div className="relative rounded-3xl overflow-hidden shadow-premium h-[400px] lg:h-[560px]">
               <Image
-                src="/imgi_4_lib.jpg"
+                src="/IMG-20260512-WA0000.jpg"
                 alt="Students at Pathfinder College"
                 fill
                 className="object-cover"
@@ -77,7 +77,7 @@ export default function AboutPreview() {
             {/* Floating small image */}
             <div className="absolute -bottom-8 -right-6 w-44 h-44 rounded-2xl overflow-hidden shadow-gold border-4 border-white">
               <Image
-                src="/imgi_17_blog3.jpg"
+                src="/IMG-20260512-WA0001.jpg"
                 alt="Classroom activity"
                 fill
                 className="object-cover"
@@ -104,7 +104,7 @@ export default function AboutPreview() {
 
             {/* Year badge */}
             <div className="absolute bottom-16 left-6 bg-primary/90 backdrop-blur-sm text-white rounded-2xl px-4 py-3">
-              <div className="text-3xl font-poppins font-black text-gold leading-none">1999</div>
+              <div className="text-3xl font-poppins font-black text-gold leading-none">2010</div>
               <div className="text-white/70 text-xs mt-0.5">Established</div>
             </div>
           </motion.div>
@@ -128,7 +128,7 @@ export default function AboutPreview() {
             <div className="gold-divider mb-6" />
 
             <p className="text-gray-600 leading-relaxed mb-5 text-[0.95rem]">
-              Founded in 1999, Pathfinder College is a premier secondary school located in Samonda,
+              Founded in 2010, Pathfinder College is a premier secondary school located in Samonda,
               Ibadan, Nigeria. We are committed to raising holistic individuals who excel
               academically, morally, and socially — equipped to lead in any sphere of life.
             </p>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { usePaystackPayment } from "react-paystack";
 
 const AMOUNT = 20000;
@@ -60,6 +60,85 @@ function Field({
           error ? "border-red-400" : "border-gray-300"
         }`}
       />
+      {error && <p className="text-xs text-red-500">{error}</p>}
+    </div>
+  );
+}
+
+function BirthDatePicker({ label, required, value, onChange, error, minYear = 2013 }) {
+  const years = [];
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear; y >= minYear; y--) years.push(y);
+  
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+
+  const [internalY, setInternalY] = useState("");
+  const [internalM, setInternalM] = useState("");
+  const [internalD, setInternalD] = useState("");
+
+  useEffect(() => {
+    if (value) {
+      const [vy, vm, vd] = value.split('-');
+      setInternalY(vy || "");
+      setInternalM(String(Number(vm)) || "");
+      setInternalD(String(Number(vd)) || "");
+    } else {
+      setInternalY("");
+      setInternalM("");
+      setInternalD("");
+    }
+  }, [value]);
+
+  const handlePartChange = (part, val) => {
+    let nY = internalY, nM = internalM, nD = internalD;
+    if (part === 'y') { nY = val; setInternalY(val); }
+    if (part === 'm') { nM = val; setInternalM(val); }
+    if (part === 'd') { nD = val; setInternalD(val); }
+    
+    if (nY && nM && nD) {
+      onChange({ target: { name: 'dateOfBirth', value: `${nY}-${nM.padStart(2, '0')}-${nD.padStart(2, '0')}` } });
+    } else if (!nY && !nM && !nD) {
+      onChange({ target: { name: 'dateOfBirth', value: "" } });
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <label className="text-sm font-medium text-gray-800">
+        {label}
+        {required && <span className="text-red-500 ml-0.5">*</span>}
+      </label>
+      <div className="grid grid-cols-3 gap-2">
+        <select 
+          value={internalY} 
+          onChange={(e) => handlePartChange('y', e.target.value)}
+          className={`border rounded-lg px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900 ${error ? 'border-red-400' : 'border-gray-300'}`}
+        >
+          <option value="">Year</option>
+          {years.map(yr => <option key={yr} value={String(yr)}>{yr}</option>)}
+        </select>
+        <select 
+          value={internalM} 
+          onChange={(e) => handlePartChange('m', e.target.value)}
+          className={`border rounded-lg px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900 ${error ? 'border-red-400' : 'border-gray-300'}`}
+        >
+          <option value="">Month</option>
+          {months.map((mon, i) => <option key={mon} value={String(i + 1)}>{mon}</option>)}
+        </select>
+        <select 
+          value={internalD} 
+          onChange={(e) => handlePartChange('d', e.target.value)}
+          className={`border rounded-lg px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900 ${error ? 'border-red-400' : 'border-gray-300'}`}
+        >
+          <option value="">Day</option>
+          {days.map(day => <option key={day} value={String(day)}>{day}</option>)}
+        </select>
+      </div>
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
   );
@@ -787,14 +866,14 @@ export default function SeniorAdmissionForm() {
                 onChange={handleChange}
                 error={errors.otherNames}
               />
-              <Field
+              <BirthDatePicker
                 label="Date of Birth"
                 name="dateOfBirth"
-                type="date"
                 required
                 value={form.dateOfBirth}
                 onChange={handleChange}
                 error={errors.dateOfBirth}
+                minYear={2013}
               />
               <RadioField
                 label="Sex"

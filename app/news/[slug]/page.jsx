@@ -1,31 +1,32 @@
 // app/news/[slug]/page.jsx
-import { client, urlFor } from "@/lib/sanity";
+import { connectDB } from "@/lib/mongodb";
+import News from "@/lib/models/News";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PortableText } from "next-sanity";
 
 /* ─── Data ───────────────────────────────────────────────────────────────── */
-async function getPost(slug) {
+async function getPostData(slug) {
   try {
-    return await client.fetch(
-      `*[_type == "news" && slug.current == $slug][0] {
-        _id, title, slug, body, coverImage, publishedAt, category, author,
-        "related": *[_type == "news" && slug.current != $slug] | order(publishedAt desc)[0..2] {
-          _id, title, slug, coverImage, publishedAt, category
-        }
-      }`,
-      { slug },
-    );
-  } catch {
+    await connectDB();
+    const post = await News.findOne({ slug }).lean();
+    if (!post) return null;
+
+    const related = await News.find({ slug: { $ne: slug } })
+      .sort({ publishedAt: -1 })
+      .limit(3)
+      .lean();
+
+    return { ...post, related };
+  } catch (err) {
+    console.error("Fetch post error:", err);
     return null;
   }
 }
 
 export async function generateStaticParams() {
   try {
-    const posts = await client.fetch(
-      `*[_type == "news"] { "slug": slug.current }`,
-    );
+    await connectDB();
+    const posts = await News.find({}, { slug: 1 }).lean();
     return posts.map((p) => ({ slug: p.slug }));
   } catch {
     return [];
@@ -49,90 +50,11 @@ const categoryColors = {
   Community: "bg-rose-50 text-rose-600",
 };
 
-/* ─── Portable Text ──────────────────────────────────────────────────────── */
-const ptComponents = {
-  block: {
-    normal: ({ children }) => (
-      <p className="text-gray-700 text-[17px] leading-[1.85] mb-6 ">
-        {children}
-      </p>
-    ),
-    h2: ({ children }) => (
-      <h2 className="font-poppins font-black text-primary text-2xl mt-10 mb-4 leading-tight">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="font-poppins font-bold text-primary text-xl mt-8 mb-3 leading-snug">
-        {children}
-      </h3>
-    ),
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-gold/40 pl-5 my-8 text-gray-500 italic text-[17px] leading-relaxed">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="pl-6 mb-6 space-y-2">{children}</ul>
-    ),
-    number: ({ children }) => (
-      <ol className="pl-6 mb-6 space-y-2">{children}</ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }) => (
-      <li className="text-gray-700 text-base leading-relaxed">{children}</li>
-    ),
-    number: ({ children }) => (
-      <li className="text-gray-700 text-base leading-relaxed">{children}</li>
-    ),
-  },
-  marks: {
-    strong: ({ children }) => (
-      <strong className="text-primary font-bold">{children}</strong>
-    ),
-    em: ({ children }) => <em className="text-gray-500">{children}</em>,
-    link: ({ value, children }) => (
-      <a
-        href={value?.href}
-        className="text-primary underline font-semibold"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    ),
-  },
-  types: {
-    image: ({ value }) => {
-      if (!value?.asset) return null;
-      return (
-        <figure className="my-9">
-          <img
-            src={urlFor(value).width(900).url()}
-            alt={value.alt || ""}
-            className="w-full rounded-2xl block"
-          />
-          {value.caption && (
-            <figcaption className="text-center text-gray-400 text-xs mt-3">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
-    },
-  },
-};
-
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 export default async function NewsPostPage({ params }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPostData(slug);
   if (!post) notFound();
-
-  const hasPortableText = Array.isArray(post.body);
 
   return (
     <main className="bg-white min-h-screen">
@@ -141,7 +63,7 @@ export default async function NewsPostPage({ params }) {
         {post.coverImage && (
           <>
             <img
-              src={urlFor(post.coverImage).width(1400).height(500).url()}
+              src={post.coverImage}
               alt={post.title}
               className="absolute inset-0 w-full h-full object-cover opacity-45"
             />
@@ -187,20 +109,12 @@ export default async function NewsPostPage({ params }) {
 
       {/* Article Body */}
       <div className="max-w-[820px] mx-auto px-8 py-14">
-        <article>
-          {hasPortableText ? (
-            <PortableText value={post.body} components={ptComponents} />
-          ) : typeof post.body === "string" ? (
-            post.body.split("\n").map((para, i) =>
-              para.trim() ? (
-                <p
-                  key={i}
-                  className="text-gray-700 text-[17px] leading-[1.85] mb-6"
-                >
-                  {para}
-                </p>
-              ) : null,
-            )
+        <article className="prose prose-lg max-w-none">
+          {post.body ? (
+            <div 
+              className="text-gray-700 text-[17px] leading-[1.85] news-content"
+              dangerouslySetInnerHTML={{ __html: post.body }} 
+            />
           ) : (
             <p className="text-gray-400 text-center py-10">
               No content available for this post.
@@ -232,18 +146,15 @@ export default async function NewsPostPage({ params }) {
             <div className="grid md:grid-cols-3 gap-6">
               {post.related.map((rel) => (
                 <Link
-                  key={rel._id}
-                  href={`/news/${rel.slug?.current}`}
+                  key={rel._id.toString()}
+                  href={`/news/${rel.slug}`}
                   className="block group"
                 >
                   <div className="premium-card p-0 overflow-hidden">
                     <div className="h-36 bg-gradient-to-br from-primary-light to-primary relative overflow-hidden">
                       {rel.coverImage && (
                         <img
-                          src={urlFor(rel.coverImage)
-                            .width(400)
-                            .height(200)
-                            .url()}
+                          src={rel.coverImage}
                           alt={rel.title}
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
@@ -267,3 +178,4 @@ export default async function NewsPostPage({ params }) {
     </main>
   );
 }
+

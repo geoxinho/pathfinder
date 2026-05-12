@@ -43,18 +43,18 @@ const values = [
 
 const milestones = [
   {
-    year: "1999",
+    year: "2010",
     title: "Foundation of Pathfinder",
     desc: "Pathfinder College opens its doors, welcoming its first cohort of students with a commitment to quality education.",
     featured: true,
   },
   {
-    year: "2008",
+    year: "2014",
     title: "Secondary School Launch",
     desc: "Pathfinder College expands to include secondary education, becoming a full cradle-to-graduation institution.",
   },
   {
-    year: "2015",
+    year: "2018",
     title: "Campus Expansion",
     desc: "New classrooms, a library, and a sports facility added to serve our growing student community.",
   },
@@ -116,7 +116,7 @@ export default function AboutPage() {
               </div>
               <div className="absolute bottom-4 left-4 bg-primary/90 backdrop-blur-sm text-white rounded-2xl px-4 py-3">
                 <div className="text-3xl font-poppins font-black text-gold leading-none">
-                  1999
+                  2010
                 </div>
                 <div className="text-white/70 text-xs mt-0.5">Established</div>
               </div>
@@ -254,7 +254,7 @@ export default function AboutPage() {
               className="bg-primary text-white rounded-3xl p-8 md:row-span-2 flex flex-col justify-end"
             >
               <p className="text-5xl font-poppins font-black text-gold mb-2">
-                1999
+                2010
               </p>
               <p className="font-poppins font-bold text-lg mb-2">
                 Foundation of Pathfinder

@@ -8,7 +8,7 @@ import StatsSection from "@/components/sections/StatsSection";
 const AboutPreview = dynamic(() => import("@/components/sections/AboutPreview"), { ssr: true });
 const AcademicsPreview = dynamic(() => import("@/components/sections/AcademicsPreview"), { ssr: true });
 const GalleryPreview = dynamic(() => import("@/components/sections/GalleryPreview"), { ssr: true });
-const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), { ssr: true });
+
 const DirectorMessage = dynamic(() => import("@/components/sections/DirectorMessage"), { ssr: true });
 const SchoolAnthem = dynamic(() => import("@/components/sections/SchoolAnthem"), { ssr: true });
 const EventsPreview = dynamic(() => import("@/components/sections/EventsPreview"), { ssr: true });
@@ -22,7 +22,7 @@ export default function HomePage() {
       <AboutPreview />
       <AcademicsPreview />
       <GalleryPreview />
-      <TestimonialsSection />
+
       <DirectorMessage />
       <SchoolAnthem />
       <EventsPreview />

@@ -4,7 +4,6 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Camera, Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import Image from 'next/image';
-import { client, urlFor } from '@/lib/sanity';
 
 /* ─────────────────────────────────────────────────
    Fallback galleries (used when Sanity returns empty)
@@ -37,16 +36,11 @@ const FALLBACK_GALLERY = [
   },
 ];
 
-/* helper — get a usable URL from either a Sanity image object or a fallback */
+/* helper — get URL from either a MongoDB image object or a fallback */
 function getImageUrl(img) {
   if (!img) return null;
   if (img._isFallback) return img.url;
-  // Sanity reference via asset->
-  if (img.asset?.url) return img.asset.url;
-  // Sanity reference object (use urlFor builder)
-  if (img.asset?._ref || img._ref || img.asset) {
-    try { return urlFor(img).width(1200).quality(85).url(); } catch { return null; }
-  }
+  if (img.url) return img.url;
   return null;
 }
 
@@ -230,17 +224,9 @@ export default function GalleryPage() {
   useEffect(() => {
     async function fetchGallery() {
       try {
-        /* Fetch both a direct URL (if stored that way) and the raw reference */
-        const data = await client.fetch(
-          `*[_type == "gallery"] | order(publishedAt desc) {
-            _id, title, subtitle, publishedAt,
-            "images": images[]{
-              asset->{ _id, url, _ref },
-              "ref": asset._ref
-            }
-          }`,
-        );
-        if (data?.length > 0) {
+        const res = await fetch('/api/gallery');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
           setAlbums(data);
         } else {
           setAlbums(FALLBACK_GALLERY);

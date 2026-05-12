@@ -22,7 +22,7 @@ const tabs = [
     label: 'Junior School',
     subtitle: 'Creche – Primary 5',
     image:
-      '/imgi_24_pathfinder.jpg',
+      '/IMG-20260512-WA0002.jpg',
     description:
       'Our Junior School (Primary) programme nurtures every child from Creche through Primary 5 in a warm, stimulating environment. We build strong literacy, numeracy, and social foundations through play-based and structured learning.',
     highlights: [
@@ -52,7 +52,7 @@ const tabs = [
     label: 'Senior School',
     subtitle: 'JSS 1 – SS3',
     image:
-      '/imgi_8_exam.jpg',
+      '/IMG-20260512-WA0003.jpg',
     description:
       'Our Senior School (Secondary) covers JSS 1 through SS3, preparing students for BECE, WAEC, NECO, and university entrance with rigorous academic programs, specialised streams, and world-class teaching methodology.',
     highlights: [

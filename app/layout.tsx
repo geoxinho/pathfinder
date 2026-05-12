@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import PageWrapper from "@/components/PageWrapper";
+import LayoutContent from "./LayoutContent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -84,14 +82,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favico.png" />
       </head>
-      <body className="antialiased">
-        <Navbar />
-        <PageWrapper>{children}</PageWrapper>
-        <Footer />
+      <body className="antialiased" suppressHydrationWarning>
+        <LayoutContent>{children}</LayoutContent>
         <SpeedInsights />
         <Analytics />
       </body>
