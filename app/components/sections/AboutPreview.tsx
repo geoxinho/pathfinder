@@ -66,7 +66,7 @@ export default function AboutPreview() {
             {/* Main image */}
             <div className="relative rounded-3xl overflow-hidden shadow-premium h-[400px] lg:h-[560px]">
               <Image
-                src="/IMG-20260512-WA0000.jpg"
+                src="/lib_img.png"
                 alt="Students at Pathfinder College"
                 fill
                 className="object-cover"

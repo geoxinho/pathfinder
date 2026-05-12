@@ -25,22 +25,22 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[600px] md:h-screen flex items-center overflow-hidden">
-      {/* Background — Next.js Image with priority for optimal LCP */}
+    <section className="relative h-screen flex items-center overflow-hidden">
+      {/* Background — Fixed effect using a wrapper */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/IMG-20260512-WA0004.jpg"
-          alt="Pathfinder College Campus"
-          fill
-          priority
-          quality={75}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgUH/8QAIhAAAQMEAgMAAAAAAAAAAAAAAQIDBAAFERIhMUH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8Amm1pvKlttJDSVFJIQ2CokqJJJJJJyfc1qWxbbK2whDaEpSlISkDYAAAAAflKVf/Z"
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+        <div className="fixed inset-0 z-0">
+          <Image
+            src="/hero_image.png"
+            alt="Pathfinder College Campus"
+            fill
+            priority
+            quality={100}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/30 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
       </div>
 
       {/* Floating Badges — desktop only */}
