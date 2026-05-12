@@ -1,10 +1,8 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 
-// Eagerly load the first visible section (above fold)
-import StatsSection from "@/components/sections/StatsSection";
-
 // Lazy load all below-fold sections — split their JS from the initial bundle
+const StatsSection = dynamic(() => import("@/components/sections/StatsSection"), { ssr: true });
 const AboutPreview = dynamic(() => import("@/components/sections/AboutPreview"), { ssr: true });
 const AcademicsPreview = dynamic(() => import("@/components/sections/AcademicsPreview"), { ssr: true });
 const GalleryPreview = dynamic(() => import("@/components/sections/GalleryPreview"), { ssr: true });

@@ -35,7 +35,7 @@ export default function Hero() {
             alt="Pathfinder College Campus"
             fill
             priority
-            quality={100}
+            quality={80}
             className="object-cover object-center w-full h-full opacity-80"
             sizes="100vw"
           />

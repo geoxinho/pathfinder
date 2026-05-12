@@ -70,6 +70,7 @@ export default function AboutPreview() {
                 alt="Students at Pathfinder College"
                 fill
                 className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
@@ -81,6 +82,7 @@ export default function AboutPreview() {
                 alt="Classroom activity"
                 fill
                 className="object-cover"
+                sizes="176px"
               />
             </div>
 

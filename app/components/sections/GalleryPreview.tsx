@@ -172,14 +172,16 @@ export default function GalleryPreview() {
           >
             <X size={20} />
           </button>
-          <motion.img
-            initial={{ scale: 0.85 }}
-            animate={{ scale: 1 }}
-            src={lightbox}
-            alt="Gallery preview"
-            className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="relative w-full max-w-5xl h-[85vh]">
+            <Image
+              src={lightbox}
+              alt="Gallery preview"
+              fill
+              className="object-contain rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+              quality={90}
+            />
+          </div>
         </motion.div>
       )}
     </section>
