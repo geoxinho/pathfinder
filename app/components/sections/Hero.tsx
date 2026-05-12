@@ -173,7 +173,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center gap-5"
           >
             <Link href="/admissions" className="btn-primary-gold group w-full sm:w-auto px-10 py-5 rounded-2xl flex items-center justify-center gap-3 text-lg">
-              Begin Your Journey
+              Apply Now — {new Date().getFullYear()} / {new Date().getFullYear()+1}
               <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform duration-300" />
             </Link>
             
