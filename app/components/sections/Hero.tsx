@@ -26,9 +26,9 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex items-center overflow-hidden">
-      {/* Background — Fixed effect using a wrapper */}
-      <div className="absolute inset-0 z-0">
-        <div className="fixed inset-0 z-0">
+      {/* Background — Sticky effect constrained to the section to prevent leakage */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="sticky top-0 h-screen w-full">
           <Image
             src="/hero_image.png"
             alt="Pathfinder College Campus"
@@ -38,9 +38,9 @@ export default function Hero() {
             className="object-cover object-center"
             sizes="100vw"
           />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/30 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/30 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
       </div>
 
       {/* Floating Badges — desktop only */}

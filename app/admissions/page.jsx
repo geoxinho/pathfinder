@@ -29,8 +29,8 @@ const paths = [
 ];
 
 const steps = [
-  { num: '01', title: 'Payment', desc: 'Securely pay the application fee via our online portal or bank transfer to initiate your registration.' },
-  { num: '02', title: 'Form Filling', desc: 'Complete the digital application form with accurate student details and academic records.' },
+  { num: '01', title: 'Form Filling', desc: 'Complete the digital application form with accurate student details and academic records.' },
+  { num: '02', title: 'Payment', desc: 'Securely pay the application fee via our online portal or bank transfer to initiate your registration.' },
   { num: '03', title: 'Submission', desc: 'Upload required documents and submit. Our admissions team will contact you for entrance assessments.' },
 ];
 
