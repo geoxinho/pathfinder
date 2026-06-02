@@ -88,42 +88,10 @@ export default function AdmissionsTab() {
     window.open(`/admin/print/admission/${selected._id}`, "_blank");
   };
 
-  const handleDownload = async () => {
+  const handleDownload = () => {
     if (!selected) return;
-    setPdfLoading(true);
-    try {
-      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
-        import("html2canvas"),
-        import("jspdf"),
-      ]);
-
-      const el = document.getElementById("admission-detail-pane");
-      if (!el) {
-        window.print();
-        return;
-      }
-
-      const canvas = await html2canvas(el, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#0f172a",
-        logging: false,
-      });
-
-      const imgData = canvas.toDataURL("image/jpeg", 0.95);
-      const pdf = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
-      const pgW = pdf.internal.pageSize.getWidth();
-      const pgH = pdf.internal.pageSize.getHeight();
-      const ratio = Math.min(pgW / canvas.width, pgH / canvas.height);
-      
-      pdf.addImage(imgData, "JPEG", 0, 0, canvas.width * ratio, canvas.height * ratio);
-      pdf.save(`${selected.surname}_${selected.otherNames}_Admission.pdf`);
-    } catch (err) {
-      console.error("PDF generation failed:", err);
-      window.print();
-    } finally {
-      setPdfLoading(false);
-    }
+    // Open the same print page — the user can use the dedicated Download PDF button there
+    window.open(`/admin/print/admission/${selected._id}`, "_blank");
   };
 
   if (loading) return <div className="flex items-center justify-center py-20"><Loader2 className="animate-spin text-amber-400" size={32} /></div>;
