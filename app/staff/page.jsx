@@ -19,30 +19,30 @@ import Link from "next/link";
 ───────────────────────────────────────────── */
 const leadership = [
   {
-    name: "Mr. Adebayo O. Olatunji",
+    name: "Dr.(Mrs) K.A Laoye",
     role: "Principal",
     sub: "Chief Academic Officer",
-    img: "/staff_principal.png",
+    img: "/principal.jpg",
     bio: "With over 25 years of experience in education, Mr. Olatunji leads Pathfinder College with a visionary approach that balances academic rigour with holistic character development.",
     badge: "Principal",
     badgeColor: "bg-gold text-primary",
     featured: true,
   },
   {
-    name: "Mrs. Funke A. Adeyemi",
+    name: "Mr. ",
     role: "Vice Principal",
     sub: "Administration",
-    img: "/staff_vice1.png",
-    bio: "Mrs. Adeyemi oversees the day-to-day administrative operations of the school, ensuring a smooth, disciplined and student-centred environment.",
+    img: "/vp1.jpg",
+    bio: "Mr. Adeyemi oversees the day-to-day administrative operations of the school, ensuring a smooth, disciplined and student-centred environment.",
     badge: "Vice Principal I",
     badgeColor: "bg-primary/10 text-primary",
   },
   {
-    name: "Mr. Emeka C. Nwachukwu",
+    name: "Mr. Adeyemo",
     role: "Vice Principal",
     sub: "Academics",
-    img: "/staff_vice2.png",
-    bio: "Mr. Nwachukwu drives the academic agenda of Pathfinder College, coordinating curriculum delivery, staff development and student performance improvement.",
+    img: "/vp2.jpg",
+    bio: "Mr. Adeyemo drives the academic agenda of Pathfinder College, coordinating curriculum delivery, staff development and student performance improvement.",
     badge: "Vice Principal II",
     badgeColor: "bg-primary/10 text-primary",
   },
@@ -318,7 +318,11 @@ export default function StaffPage() {
 
         {/* wave */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M0 60L1440 60L1440 30C1200 60 960 70 720 60C480 50 240 20 0 30L0 60Z"
               fill="white"
@@ -363,12 +367,12 @@ export default function StaffPage() {
 
               <div className="relative z-10 grid md:grid-cols-2 gap-0 items-center">
                 {/* Photo */}
-                <div className="relative h-80 md:h-full min-h-[320px] overflow-hidden">
+                <div className="relative h-80 md:h-full min-h-[320px] overflow-hidden ">
                   <Image
                     src={leadership[0].img}
                     alt={leadership[0].name}
                     fill
-                    className="object-cover object-top"
+                    className="object-contain object-top w-4xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/20 hidden md:block" />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent md:hidden" />
@@ -388,7 +392,7 @@ export default function StaffPage() {
                   <p className="text-white/70 leading-relaxed text-sm mb-7">
                     {leadership[0].bio}
                   </p>
-                  <div className="flex flex-wrap gap-3">
+                  {/* <div className="flex flex-wrap gap-3">
                     <a
                       href="mailto:principal@pathfindercollege.edu.ng"
                       className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-poppins font-semibold px-4 py-2.5 rounded-xl transition-all"
@@ -401,7 +405,7 @@ export default function StaffPage() {
                     >
                       <Phone size={13} /> Call Office
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -446,14 +450,14 @@ export default function StaffPage() {
                         {person.bio}
                       </p>
                     </div>
-                    <div className="flex gap-2 mt-4">
+                    {/* <div className="flex gap-2 mt-4">
                       <a
                         href={`mailto:vp${i + 1}@pathfindercollege.edu.ng`}
                         className="flex items-center gap-1.5 text-primary/80 hover:text-primary text-xs font-poppins font-semibold transition-colors"
                       >
                         <Mail size={12} /> Email
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </motion.div>
@@ -540,7 +544,10 @@ export default function StaffPage() {
                       key={member.name}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ duration: 0.4, delay: 0.05 * mi + 0.1 * di }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.05 * mi + 0.1 * di,
+                      }}
                       className="group premium-card flex items-center gap-4 hover:-translate-y-1"
                     >
                       {/* Avatar */}

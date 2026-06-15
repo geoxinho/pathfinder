@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
+import { useRef, useState } from "react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowRight,
   BookOpen,
@@ -14,88 +14,106 @@ import {
   Dumbbell,
   Monitor,
   Palette,
-} from 'lucide-react';
+} from "lucide-react";
 
 const tabs = [
   {
-    id: 'junior',
-    label: 'Junior School',
-    subtitle: 'Creche – Primary 5',
-    image:
-      '/IMG-20260512-WA0002.jpg',
+    id: "junior",
+    label: "Junior School",
+    subtitle: "Creche – Primary 5",
+    image: "/junior_cate.jpg",
     description:
-      'Our Junior School (Primary) programme nurtures every child from Creche through Primary 5 in a warm, stimulating environment. We build strong literacy, numeracy, and social foundations through play-based and structured learning.',
+      "Our Junior School (Primary) programme nurtures every child from Creche through Primary 5 in a warm, stimulating environment. We build strong literacy, numeracy, and social foundations through play-based and structured learning.",
     highlights: [
-      'Creche, Nursery & Primary classes (Creche – Primary 5)',
-      'Phonics-based Reading & Writing mastery',
-      'Early STEM exploration & Number skills',
-      'Creative Arts, Music & Cultural Studies',
-      'Physical Education & Social Development',
-      'Christian Religious Studies & Moral Education',
+      "Creche, Nursery & Primary classes (Creche – Primary 5)",
+      "Phonics-based Reading & Writing mastery",
+      "Early STEM exploration & Number skills",
+      "Creative Arts, Music & Cultural Studies",
+      "Physical Education & Social Development",
+      "Christian Religious Studies & Moral Education",
     ],
     subjects: [
-      'English Language',
-      'Mathematics',
-      'Basic Science',
-      'Social Studies',
-      'CRS',
-      'French',
-      'Computer',
-      'Fine Arts',
-      'Music',
-      'PE',
+      "English Language",
+      "Mathematics",
+      "Basic Science",
+      "Social Studies",
+      "CRS",
+      "French",
+      "Computer",
+      "Fine Arts",
+      "Music",
+      "PE",
     ],
-    color: 'from-blue-500 to-blue-400',
+    color: "from-blue-500 to-blue-400",
   },
   {
-    id: 'senior',
-    label: 'Senior School',
-    subtitle: 'JSS 1 – SS3',
-    image:
-      '/IMG-20260512-WA0003.jpg',
+    id: "senior",
+    label: "Senior School",
+    subtitle: "JSS 1 – SS3",
+    image: "/IMG-20260512-WA0003.jpg",
     description:
-      'Our Senior School (Secondary) covers JSS 1 through SS3, preparing students for BECE, WAEC, NECO, and university entrance with rigorous academic programs, specialised streams, and world-class teaching methodology.',
+      "Our Senior School (Secondary) covers JSS 1 through SS3, preparing students for BECE, WAEC, NECO, and university entrance with rigorous academic programs, specialised streams, and world-class teaching methodology.",
     highlights: [
-      'JSS 1–3 (Junior Secondary) & SS1–SS3 (Senior Secondary)',
-      'Science, Commercial & Arts specialisations (SS)',
-      'Dedicated WAEC/NECO exam preparation',
-      'University Admission coaching (UTME/DE)',
-      'Leadership and entrepreneurship training',
-      'Career counselling and mentorship',
+      "JSS 1–3 (Junior Secondary) & SS1–SS3 (Senior Secondary)",
+      "Science, Commercial & Arts specialisations (SS)",
+      "Dedicated WAEC/NECO exam preparation",
+      "University Admission coaching (UTME/DE)",
+      "Leadership and entrepreneurship training",
+      "Career counselling and mentorship",
     ],
     subjects: [
-      'Further Math',
-      'Physics',
-      'Chemistry',
-      'Biology',
-      'Economics',
-      'Government',
-      'Literature',
-      'Accounting',
-      'Commerce',
-      'Geography',
+      "Further Math",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Economics",
+      "Government",
+      "Literature",
+      "Accounting",
+      "Commerce",
+      "Geography",
     ],
-    color: 'from-gold to-gold-light',
+    color: "from-gold to-gold-light",
   },
 ];
 
 const facilities = [
-  { icon: Beaker, label: 'Science Labs', count: '3 Labs', color: 'bg-blue-50 text-blue-500' },
-  { icon: Monitor, label: 'Computer Lab', count: 'Working PC', color: 'bg-indigo-50 text-indigo-500' },
+  {
+    icon: Beaker,
+    label: "Science Labs",
+    count: "3 Labs",
+    color: "bg-blue-50 text-blue-500",
+  },
+  {
+    icon: Monitor,
+    label: "Computer Lab",
+    count: "Working PC",
+    color: "bg-indigo-50 text-indigo-500",
+  },
   {
     icon: BookOpen,
-    label: 'Library',
-    count: '1,000+ Books',
-    color: 'bg-emerald-50 text-emerald-500',
+    label: "Library",
+    count: "1,000+ Books",
+    color: "bg-emerald-50 text-emerald-500",
   },
-  { icon: Music, label: 'Music Room', count: 'Full Studio', color: 'bg-rose-50 text-rose-500' },
+  {
+    icon: Music,
+    label: "Music Room",
+    count: "Full Studio",
+    color: "bg-rose-50 text-rose-500",
+  },
   // {
   //   icon: Dumbbell,
   //   label: 'Music Room',
   //   count: 'Full Instruments',
   //   color: 'bg-amber-50 text-amber-500',
   // },
-  { icon: Palette, label: 'Art Studio', count: 'Equipped', color: 'bg-purple-50 text-purple-500' },
+  {
+    icon: Palette,
+    label: "Art Studio",
+    count: "Equipped",
+    color: "bg-purple-50 text-purple-500",
+  },
   // {
   //   icon: Globe,
   //   label: 'Language Lab',
@@ -104,20 +122,23 @@ const facilities = [
   // },
   {
     icon: Calculator,
-    label: 'Math Centre',
-    count: '24/7 Access',
-    color: 'bg-orange-50 text-orange-500',
+    label: "Math Centre",
+    count: "24/7 Access",
+    color: "bg-orange-50 text-orange-500",
   },
 ];
 
 export default function AcademicsPreview() {
-  const [activeTab, setActiveTab] = useState('junior');
+  const [activeTab, setActiveTab] = useState("junior");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
   const activeData = tabs.find((t) => t.id === activeTab)!;
 
   return (
-    <section ref={ref} className="section-padding-lg bg-white relative overflow-hidden">
+    <section
+      ref={ref}
+      className="section-padding-lg bg-white relative overflow-hidden"
+    >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/3 rounded-full -translate-x-1/3 -translate-y-1/3 blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold/5 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl" />
@@ -139,8 +160,8 @@ export default function AcademicsPreview() {
             World-Class <span className="gradient-text">Curriculum</span>
           </h2>
           <p className="section-subtitle mx-auto text-center">
-            Our comprehensive academic programme develops well-rounded individuals ready for
-            university and beyond.
+            Our comprehensive academic programme develops well-rounded
+            individuals ready for university and beyond.
           </p>
           <div className="gold-divider mx-auto mt-5" />
         </motion.div>
@@ -159,14 +180,14 @@ export default function AcademicsPreview() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative px-6 py-3 rounded-xl font-poppins font-semibold text-sm transition-all duration-300 ${
                   activeTab === tab.id
-                    ? 'bg-white text-primary shadow-md'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? "bg-white text-primary shadow-md"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 <span className="relative z-10">{tab.label}</span>
                 <span
                   className={`relative z-10 ml-2 text-xs font-normal ${
-                    activeTab === tab.id ? 'text-gold' : 'text-gray-400'
+                    activeTab === tab.id ? "text-gold" : "text-gray-400"
                   }`}
                 >
                   {tab.subtitle}
@@ -207,12 +228,17 @@ export default function AcademicsPreview() {
             <h3 className="font-poppins font-bold text-2xl text-primary mb-4">
               {activeData.label} Programme
             </h3>
-            <p className="text-gray-600 leading-relaxed mb-6 text-sm">{activeData.description}</p>
+            <p className="text-gray-600 leading-relaxed mb-6 text-sm">
+              {activeData.description}
+            </p>
 
             {/* Highlights */}
             <div className="space-y-2.5 mb-6">
               {activeData.highlights.map((h, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-gray-700 text-sm">
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 text-gray-700 text-sm"
+                >
                   <div className="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-gold" />
                   </div>
@@ -238,9 +264,15 @@ export default function AcademicsPreview() {
               </div>
             </div>
 
-            <Link href="/academics" className="btn-primary inline-flex group text-sm">
+            <Link
+              href="/academics"
+              className="btn-primary inline-flex group text-sm"
+            >
               View Full Curriculum
-              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight
+                size={15}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </Link>
           </div>
         </motion.div>
@@ -253,8 +285,12 @@ export default function AcademicsPreview() {
         >
           {/* Title */}
           <div className="text-center mb-8">
-            <h3 className="font-poppins font-bold text-xl text-primary">World-Class Facilities</h3>
-            <p className="text-gray-500 text-sm mt-1">Equipped for 21st-century learning</p>
+            <h3 className="font-poppins font-bold text-xl text-primary">
+              World-Class Facilities
+            </h3>
+            <p className="text-gray-500 text-sm mt-1">
+              Equipped for 21st-century learning
+            </p>
           </div>
 
           {/* Scrolling track */}
@@ -284,25 +320,28 @@ export default function AcademicsPreview() {
             className="relative overflow-hidden"
             style={{
               maskImage:
-                'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
               WebkitMaskImage:
-                'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
             }}
           >
             {/* Track — items repeated ×3 for seamless loop */}
             <div className="marquee-track py-2">
               {[...facilities, ...facilities, ...facilities].map((fac, i) => (
                 <div key={i} className="marquee-item">
-                  <div className="premium-card text-center p-4 group h-full cursor-default"
-                       style={{ transition: 'box-shadow .2s, transform .2s' }}
-                       onMouseEnter={e => {
-                         (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
-                         (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(14,83,156,.15)';
-                       }}
-                       onMouseLeave={e => {
-                         (e.currentTarget as HTMLElement).style.transform = '';
-                         (e.currentTarget as HTMLElement).style.boxShadow = '';
-                       }}
+                  <div
+                    className="premium-card text-center p-4 group h-full cursor-default"
+                    style={{ transition: "box-shadow .2s, transform .2s" }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.transform =
+                        "translateY(-4px)";
+                      (e.currentTarget as HTMLElement).style.boxShadow =
+                        "0 8px 28px rgba(14,83,156,.15)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.transform = "";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "";
+                    }}
                   >
                     <div
                       className={`w-10 h-10 rounded-xl ${fac.color} flex items-center justify-center mx-auto mb-2.5
