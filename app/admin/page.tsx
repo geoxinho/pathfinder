@@ -17,6 +17,7 @@ import ContactsTab from './_tabs/ContactsTab';
 import AdmissionsTab from './_tabs/AdmissionsTab';
 import CareersTab from './_tabs/CareersTab';
 import UsersTab from './_tabs/UsersTab';
+import StaffTab from './_tabs/StaffTab';
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -49,6 +50,7 @@ export default function AdminPage() {
       { id: 'contacts', label: 'Contact Inbox', icon: Mail },
       { id: 'admissions', label: 'Admissions', icon: GraduationCap },
       { id: 'careers', label: 'Careers', icon: Briefcase },
+      { id: 'staff', label: 'Staff & Team', icon: UsersIcon },
     ];
 
     if (user?.role === 'admin') {
@@ -68,6 +70,7 @@ export default function AdminPage() {
       case 'contacts': return <ContactsTab />;
       case 'admissions': return <AdmissionsTab />;
       case 'careers': return <CareersTab />;
+      case 'staff': return <StaffTab />;
       case 'users': return <UsersTab />;
       default: return <DashboardTab onTabChange={setActiveTab} />;
     }

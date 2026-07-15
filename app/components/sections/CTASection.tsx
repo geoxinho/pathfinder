@@ -109,7 +109,7 @@ export default function CTASection() {
               title: 'Talk to Admissions',
               desc: 'Speak directly with our admissions team for personalized guidance.',
               cta: 'Call Now',
-              href: 'tel:+2348012345678',
+              href: 'tel:08033240047',
               color: 'text-blue-500 bg-blue-50',
             },
             {

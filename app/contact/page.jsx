@@ -16,22 +16,22 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+234 (0) 801 234 5678",
+    value: "08033240047\n08033848838\n08033657278",
     color: "text-emerald-500 bg-emerald-50",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "info@pathfindercollege.edu.ng",
+    value: "info_pci01@yahoo.co.uk",
     color: "text-gold bg-gold/10",
   },
 ];
 
 const socials = [
-  { icon: "🌐", label: "Facebook", href: "#" },
-  { icon: "🐦", label: "Twitter", href: "#" },
-  { icon: "💼", label: "LinkedIn", href: "#" },
-  { icon: "📸", label: "Instagram", href: "#" },
+  { icon: "🌐", label: "Facebook", href: "https://web.facebook.com/profile.php?id=100068678105937" },
+  { icon: "🐦", label: "X", href: "https://x.com/PathfinderColl1?s=20" },
+  { icon: "📸", label: "Instagram", href: "https://www.instagram.com/pathfindercollegeibadan/" },
+  { icon: "🎥", label: "YouTube", href: "https://youtube.com/@pathfindercollegeibadan7961?si=2YVVywqnhYGjKgK0" },
 ];
 
 export default function ContactPage() {

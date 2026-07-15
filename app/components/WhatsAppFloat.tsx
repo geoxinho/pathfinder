@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const WhatsAppFloat = () => {
-  const phoneNumber = "2348168303357"; // Replace with actual school phone number
+  const phoneNumber = "2348033240047"; // Replace with actual school phone number
   const message = "Hello Pathfinder College, I would like to make an inquiry.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
@@ -12,11 +12,11 @@ const WhatsAppFloat = () => {
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ 
+      transition={{
         type: "spring",
         stiffness: 260,
         damping: 20,
-        delay: 1.5 
+        delay: 1.5
       }}
       className="fixed bottom-6 right-6 z-50"
     >
@@ -28,7 +28,7 @@ const WhatsAppFloat = () => {
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle size={32} />
-        
+
         {/* Tooltip */}
         <span className="absolute right-full mr-4 px-3 py-1 bg-white text-[#0E539C] text-sm font-semibold rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap border border-slate-100">
           Chat with us!

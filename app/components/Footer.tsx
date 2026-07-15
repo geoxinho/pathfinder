@@ -29,10 +29,10 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Globe, href: '#', label: 'Facebook' },
-  { icon: X, href: '#', label: 'Twitter' },
-  { icon: Camera, href: '#', label: 'Instagram' },
-  { icon: Video, href: '#', label: 'YouTube' },
+  { icon: Globe, href: 'https://web.facebook.com/profile.php?id=100068678105937', label: 'Facebook' },
+  { icon: X, href: 'https://x.com/PathfinderColl1?s=20', label: 'X' },
+  { icon: Camera, href: 'https://www.instagram.com/pathfindercollegeibadan/', label: 'Instagram' },
+  { icon: Video, href: 'https://youtube.com/@pathfindercollegeibadan7961?si=2YVVywqnhYGjKgK0', label: 'YouTube' },
 ];
 
 export default function Footer() {
@@ -63,23 +63,24 @@ export default function Footer() {
 
             {/* Contact info */}
             <div className="space-y-3 mb-6">
-              <a
-                href="tel:+2348012345678"
-                className="flex items-center gap-3 text-white/70 hover:text-gold transition-colors text-sm"
-              >
-                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+              <div className="flex items-start gap-3 text-white/70 text-sm">
+                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Phone size={14} />
                 </div>
-                +234 801 234 5678
-              </a>
+                <div className="flex flex-col gap-1">
+                  <a href="tel:08033240047" className="hover:text-gold transition-colors">08033240047</a>
+                  <a href="tel:08033848838" className="hover:text-gold transition-colors">08033848838</a>
+                  <a href="tel:08033657278" className="hover:text-gold transition-colors">08033657278</a>
+                </div>
+              </div>
               <a
-                href="mailto:info@pathfindercollege.edu.ng"
+                href="mailto:info_pci01@yahoo.co.uk"
                 className="flex items-center gap-3 text-white/70 hover:text-gold transition-colors text-sm"
               >
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
                   <Mail size={14} />
                 </div>
-                info@pathfindercollege.edu.ng
+                info_pci01@yahoo.co.uk
               </a>
               <div className="flex items-start gap-3 text-white/70 text-sm">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
